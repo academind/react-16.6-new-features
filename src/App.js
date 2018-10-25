@@ -1,34 +1,24 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 
-import Login from './components/Login';
-import Profile from './components/Profile';
-
-export const AuthContext = React.createContext({
-  isAuth: false,
-  toggleAuth: () => {}
-});
+import Posts from './containers/Posts';
+import User from './containers/User';
+import Welcome from './containers/Welcome';
 
 class App extends Component {
-  state = {
-    isAuth: false
-  };
-
-  toggleAuth = () => {
-    this.setState(prevState => {
-      return {
-        isAuth: !prevState.isAuth
-      };
-    });
-  };
-
   render() {
     return (
-      <AuthContext.Provider
-        value={{ isAuth: this.state.isAuth, toggleAuth: this.toggleAuth }}
-      >
-        <Login />
-        <Profile />
-      </AuthContext.Provider>
+      <BrowserRouter>
+        <React.Fragment>
+          <nav>
+            <NavLink to="/user">User Page</NavLink> |&nbsp;
+            <NavLink to="/posts">Posts Page</NavLink>
+          </nav>
+          <Route path="/" component={Welcome} exact />
+          <Route path="/user" component={User} />
+          <Route path="/posts" component={Posts} />
+        </React.Fragment>
+      </BrowserRouter>
     );
   }
 }
