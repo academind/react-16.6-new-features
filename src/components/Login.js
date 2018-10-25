@@ -1,10 +1,13 @@
 import React from 'react';
 
-const login = props =>
-  props.authenticated ? (
-    <button onClick={props.onLogout}>Logout</button>
-  ) : (
-    <button onClick={props.onLogin}>Login</button>
+const login = props => {
+  console.log(props);
+  return (
+    <React.Fragment>
+      <button onClick={props.onLogout}>Logout</button>
+      <button onClick={props.onLogin}>Login</button>
+    </React.Fragment>
   );
+};
 
-export default login;
+export default React.memo(login);
